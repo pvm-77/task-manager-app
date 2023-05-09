@@ -1,0 +1,35 @@
+@baseUrl=http://localhost:3005/api
+
+# @name login POST {{baseUrl}}/login Content-Type: application/json
+
+{
+"username":"mohib297", "password":"somepassword"
+}
+
+###
+
+# @authToken={{login.response.body.token}}
+
+###
+
+GET {{baseUrl}}/tasks
+
+###
+
+# POST http://localhost:3001/api/blogs Content-type: application/json Authorization: bearer {{authToken}}
+
+# {
+# "author":"Mohib Khan", "url":"wanderingmohib.com", "title":"nearest places to visit", "likes":20
+# }
+
+###
+
+# DELETE http://localhost:3001/api/blogs/632c0c7a6a6ecab8c8c20405 Authorization: bearer {{authToken}}
+
+###
+
+# PUT http://localhost:3001/api/blogs/632c104de357079175ae7405 Content-type: application/json Authorization: bearer {{authToken}}
+
+# {
+# "author":"Sarfaraz Hussain", "likes":9, "url":"i amcodeigniter.com", "title":"what is code igniter"
+# }
