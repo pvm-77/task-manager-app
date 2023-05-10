@@ -1,0 +1,50 @@
+@baseUrl=http://localhost:3005/api
+
+# @name login POST {{baseUrl}}/login Content-Type: application/json
+
+{
+"username":"mohib297", "password":"somepassword"
+}
+
+###
+
+# @authToken={{login.response.body.token}}
+
+###
+
+GET {{baseUrl}}/users
+
+###
+
+###
+
+GET {{baseUrl}}/users/6254760580d3ef7929f00eec
+
+###
+
+POST http://localhost:3005/api/users
+content-type: application/json 
+
+{
+    "name":"taskuser1", 
+    "email":"taskmanager1@gmail.com", 
+    "password":"taskmanager"
+
+}
+
+###
+
+DELETE {{baseUrl}}/users/645b407aa61a581b838ab5da
+
+###
+
+PATCH  {{baseUrl}}/users/6254760580d3ef7929f00eec 
+content-type: application/json
+
+{
+    "name":"Sarfaraz Hussain",
+    "email":"taskmanger1update@gmail.com", 
+    "password":"taskmanager"
+}
+
+###
