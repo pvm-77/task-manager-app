@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
+import config from '../utils/config.js'
 // const Task = require('./task')
 
 const userSchema = new mongoose.Schema(
@@ -70,11 +71,17 @@ const userSchema = new mongoose.Schema(
 // })
 
 userSchema.statics.findByCredentials = async (email, password) => {
+    console.log('in fin cred', email)
     const user = await User.findOne({ email })
+    console.log('find user', user.email)
     if (!user) {
-        throw new Error('unable to login')
+        throw new Error('user not exist')
     }
-    const isMatch = await bcrypt.compare(password, user.password)
+    // const isMatch = await bcrypt.compare(password, user.password)
+    // if (!isMatch) {
+    //     throw new Error('unable to login')
+    // }
+    const isMatch = password === user.password ? true : false;
     if (!isMatch) {
         throw new Error('unable to login')
     }
@@ -100,7 +107,7 @@ userSchema.methods.toJSON = function () {
 // generate auth token function on user instance
 userSchema.methods.generateAuthToken = async function () {
     const user = this
-    const token = jwt.sign({ _id: user._id.toString() }, 'thisismynewcourse', { expiresIn: '7 days' })
+    const token = jwt.sign({ _id: user._id.toString() }, config.JWT_SECRET, { expiresIn: '7 days' })
     user.tokens = user.tokens.concat({ token })
     await user.save()
 

@@ -1,9 +1,7 @@
 import express, { json } from 'express';
-
-
 import User from '../models/user.js'
-
 import logger from '../utils/logger.js'
+import middleware from '../utils/middlware.js'
 const userRouter = express.Router();
 
 // create user
@@ -88,7 +86,30 @@ userRouter.delete('/:id', async (req, res) => {
 })
 
 
-userRouter.post('/users/login',(req,res)=>{})
-userRouter.post('/users/logout',(req,res)=>{})
+userRouter.post('/login', async (req, res) => {
+    console.log('in login controller');
+    try {
+        const user = await User.findByCredentials(req.body.email, req.body.password);
+        const token = await user.generateAuthToken();
+        res.status(200).json({user,token});
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+})
+
+
+userRouter.post('/logout', middleware.authenticateUser, async (req, res) => {
+    try {
+        console.log('token send by req:',req.token)
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token !== req.token
+        })
+        await req.user.save()
+        res.status(200).json({ message: 'logout successfully' })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
 export default userRouter;
 

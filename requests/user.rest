@@ -1,18 +1,29 @@
 @baseUrl=http://localhost:3005/api
 
-# @name login POST {{baseUrl}}/login Content-Type: application/json
+
+POST http://localhost:3005/api/users/login 
+Content-Type: application/json
 
 {
-"username":"mohib297", "password":"somepassword"
+    "email": "taskmanger1update@gmail.com", 
+    "password": "taskmanager"
 }
 
 ###
-
-# @authToken={{login.response.body.token}}
+# @authToken = {{login.response.body.token}}
 
 ###
 
+POST http://localhost:3005/api/users/logout 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU0NzYwNTgwZDNlZjc5MjlmMDBlZWMiLCJpYXQiOjE2ODM3OTM0MDQsImV4cCI6MTY4NDM5ODIwNH0.nxEHI1coabPamai1bj6be7Pi8MfTQmbZD3rSbA8JfyI 
+
+###
+
+
+
 GET {{baseUrl}}/users
+Authorization: Bearer {{$response.body.token}}
+
 
 ###
 
@@ -23,6 +34,7 @@ GET {{baseUrl}}/users/6254760580d3ef7929f00eec
 ###
 
 POST http://localhost:3005/api/users
+Authorization: Bearer
 content-type: application/json 
 
 {

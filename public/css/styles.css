@@ -1,0 +1,31 @@
+.card-background{
+
+    /* background color black */
+    background-color: #17202A;
+    /* color white */
+    color: #ffffff;
+   
+}
+.card-shadow{
+    /* shadow */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.logo-center{
+    text-decoration: none;
+}
+.fa-custom{
+    font-size: 80px;
+}
+.footer-custom{
+    color: #ffffff;
+}
+.body-custom{
+    background-color: #2E4053;
+}
+#footer{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    bottom: 10px; 
+}
