@@ -2,7 +2,9 @@ import express from 'express';
 import fetch from 'node-fetch';
 import axios from 'axios';
 const webUserRouter = express();
-
+webUserRouter.get('/about',(req,res)=>{
+    res.render('about',{title:'about'})
+})
 webUserRouter.get('/', (req, res) => {
     // check if the user is logged in i.e the token cookie is present
     if (req.cookies.token) {

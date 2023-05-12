@@ -23,9 +23,9 @@ app.use('/api/tasks', taskRouter);
 app.use('/api/users', userRouter);
 
 // set path for pulic folder
-const publicPath = path.join(process.cwd(), './public');
-console.log(process.cwd())
-app.use(express.static(path.join(publicPath)))
+// const publicPath = path.join(process.cwd(), 'public');
+// console.log(publicPath)
+app.use(express.static('public'))
 
 app.set('view engine', 'hbs');
 // set pages and partials path
@@ -35,36 +35,6 @@ const partialsPath = path.join(process.cwd(), 'views', 'partials');
 hbs.registerPartials(partialsPath);
 
 app.use('/', webUserRouter);
-// home page
-// app.get('/', (req, res) => {
-//     res.render('index', {
-//         title: 'Home',
-
-//     });
-// }
-// );
-// app.get('/login', (req, res) => {
-//     res.render('login', {
-//         title: 'Login',
-
-//     });
-// }
-// );
-// app.get('/register', (req, res) => {
-//     res.render('register', {
-//         title: 'Register',
-
-//     });
-// }
-// );
-// app.get('/taskView', (req, res) => {
-//     res.render('taskView', {
-//         title: 'Task View',
-
-//     });
-// }
-
-// );
 
 
 
