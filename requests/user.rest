@@ -15,7 +15,7 @@ Content-Type: application/json
 ###
 
 POST http://localhost:3005/api/users/logout 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU0NzYwNTgwZDNlZjc5MjlmMDBlZWMiLCJpYXQiOjE2ODM3OTM0MDQsImV4cCI6MTY4NDM5ODIwNH0.nxEHI1coabPamai1bj6be7Pi8MfTQmbZD3rSbA8JfyI 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU0NzYwNTgwZDNlZjc5MjlmMDBlZWMiLCJpYXQiOjE2ODM4ODUzMTgsImV4cCI6MTY4NDQ5MDExOH0.ydFv8hXzGUgiMfnAC46ZmvzfMyZWsmBJcDLukRZp8A0 
 
 ###
 
