@@ -22,8 +22,10 @@ webUserRouter.get('/login', (req, res) => {
 });
 
 webUserRouter.post('/login', async (req, res) => {
-
+        console.log('in login post')
     try {
+        console.log('in login post try')
+
         // make an API call to the backend server
         const response = await fetch('http://localhost:3005/api/users/login', {
             method: 'POST',
@@ -47,6 +49,8 @@ webUserRouter.post('/login', async (req, res) => {
         }
     } catch (error) {
         
+        console.log('in login post catch')
+
         res.render('login', { title: 'Login', error: 'Something went wrong. Please try again later.' });
     }
 

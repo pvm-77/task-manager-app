@@ -15,7 +15,7 @@
 
 <body class="body-custom">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">scriptjs_0101</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,23 +23,24 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/projects">projects</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/projects">Projects</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="/Blogs">Blogs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">contact</a>
+                    <a class="nav-link" href="/contact">Contact</a>
                 </li>
 
                 {{#if user}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/taskView">taskApp</a>
+                </li>
                 <li class="nav-item">
                     <span class="nav-link">Welcome, {{user.name}}!</span>
                 </li>
@@ -62,9 +63,7 @@
 
 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/taskView">your task</a>
-                </li>
+
             </ul>
         </div>
     </nav>
