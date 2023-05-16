@@ -1,21 +1,20 @@
+### set the baseurl as an environment variable
 @baseUrl=http://localhost:3005/api
 
-
-POST http://localhost:3005/api/users/login 
+POST {{baseUrl}}/users/login 
 Content-Type: application/json
 
 {
     "email": "taskmanger1update@gmail.com", 
     "password": "taskmanager"
 }
+### Set the token as an environment variable ###
+@authToken = response.body.token
 
-###
-# @authToken = {{login.response.body.token}}
+### Logout API ###
 
-###
-
-POST http://localhost:3005/api/users/logout 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU0NzYwNTgwZDNlZjc5MjlmMDBlZWMiLCJpYXQiOjE2ODM4ODUzMTgsImV4cCI6MTY4NDQ5MDExOH0.ydFv8hXzGUgiMfnAC46ZmvzfMyZWsmBJcDLukRZp8A0 
+POST {{baseUrl}}/users/logout 
+Authorization: Bearer {{authToken}} 
 
 ###
 

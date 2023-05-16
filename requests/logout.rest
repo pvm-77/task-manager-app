@@ -1,0 +1,11 @@
+POST http://localhost:3005/api/users/login 
+Content-Type: application/json
+
+{
+    "email": "taskmanager1@gmail.com", 
+    "password": "taskmanager"
+}
+
+###
+POST http://localhost:3005/api/users/logout 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDViNjc0NTYxZmYwNDAyNjM0NWZlZjQiLCJpYXQiOjE2ODQyMzM0NjcsImV4cCI6MTY4NDgzODI2N30.qDK_po-b-97zx2h8vy2YnhlK0MmWRxiqznTTm01F3tw 

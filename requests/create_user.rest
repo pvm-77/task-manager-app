@@ -1,0 +1,9 @@
+POST http://localhost:3005/api/users
+content-type: application/json 
+
+{
+    "name":"taskuser2", 
+    "email":"taskmanager2@gmail.com", 
+    "password":"taskmanager"
+
+}

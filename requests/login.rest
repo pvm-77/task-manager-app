@@ -1,9 +1,7 @@
-@baseUrl=http://localhost:3005/api
-###
-@name login POST {{baseUrl}}/users/login 
-content-Type: application/json
+POST http://localhost:3005/api/users/login 
+Content-Type: application/json
 
 {
-    "email": "taskmanger1update@gmail.com", 
+    "email": "taskmanager1@gmail.com", 
     "password": "taskmanager"
 }

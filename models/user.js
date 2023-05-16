@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 import config from '../utils/config.js'
 // const Task = require('./task')
+import Task from './task.js'
 
 const userSchema = new mongoose.Schema(
     {
@@ -12,8 +13,6 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
             trim: true,
-
-
         },
         email: {
             type: String,
@@ -57,34 +56,36 @@ const userSchema = new mongoose.Schema(
                 required: true
             }
         }]
-
     },
     {
         timestamps: true
     }
 )
 // virtual data for user
-// userSchema.virtual('tasks', {
-//     ref: 'Task',
-//     localField: '_id',
-//     foreignField: 'owner'
-// })
+userSchema.virtual('tasks', {
+    ref: 'Task',
+    localField: '_id',
+    foreignField: 'owner'
+})
 
 userSchema.statics.findByCredentials = async (email, password) => {
-    console.log('in fin cred', email)
+    console.log('in find by credentials method');
     const user = await User.findOne({ email })
-    console.log('find user', user.email)
+    console.log('user mila',user)
     if (!user) {
         throw new Error('user not exist')
     }
-    // const isMatch = await bcrypt.compare(password, user.password)
-    // if (!isMatch) {
-    //     throw new Error('unable to login')
-    // }
-    const isMatch = password === user.password ? true : false;
+    console.log('passfrom client',password);
+    console.log('passfrom server',user.password);
+    const isMatch = await bcrypt.compare(password, user.password)
+    console.log('match value',isMatch)
     if (!isMatch) {
         throw new Error('unable to login')
     }
+    // const isMatch = password === user.password ? true : false;
+    // if (!isMatch) {
+    //     throw new Error('unable to login')
+    // }
     return user
 }
 // get user public profile and hide token and password info

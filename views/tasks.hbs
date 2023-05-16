@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <title>{{title}}</title>
+</head>
+
+<body class="body-custom">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">scriptjs_0101</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/projects">Projects</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Blogs">Blogs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+
+                {{#if user}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/tasks">taskApp</a>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">Welcome, {{user.name}}!</span>
+                </li>
+                <form method="POST" action="/logout" class="nav-item">
+                    <button type="submit" class="nav-link"
+                        style="border:none; background-color:transparent">Logout</button>
+                </form>
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Signup</a>
+                </li>
+                {{/if}}
+
+
+
+
+
+
+
+
+            </ul>
+        </div>
+    </nav>
+    {{!-- <section>
+        <div class="card">
+            <div class="card-body">
+                {{#if tasks}}
+                <!-- Displayed when tasks array is not empty -->
+                {{#each tasks}}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p class="card-text">{{this.description}}</p>
+                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <!-- Displayed when tasks array is empty -->
+                <p>No tasks available.</p>
+                {{/if}}
+            </div>
+        </div>
+    </section> --}}
+
+
+    {{!-- <section class=" mt-3 d-flex align-items-center justify-content-center">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h5 class="card-title">Task List</h5>
+                <button class="btn btn-primary">Add New Task</button>
+            </div>
+            <div class="card-body">
+                {{#if tasks}}
+                <!-- Displayed when tasks array is not empty -->
+                {{#each tasks}}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p class="card-text">{{this.description}}</p>
+                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <!-- Displayed when tasks array is empty -->
+                <p>No tasks available.</p>
+                {{/if}}
+            </div>
+        </div>
+    </section> --}}
+    {{!-- <section class="d-flex align-items-center justify-content-center">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h5 class="card-title">Task List</h5>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add New
+                    Task</button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {{#if tasks}}
+                    <!-- Displayed when tasks array is not empty -->
+                    {{#each tasks}}
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <p class="card-text">{{this.description}}</p>
+                                <button class="btn btn-danger">Delete</button>
+                                <button class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{else}}
+                    <!-- Displayed when tasks array is empty -->
+                    <div class="col">
+                        <p>No tasks available.</p>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </section> --}}
+
+    <!-- Add Task Modal -->
+    {{!-- <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTaskModalLabel">Add New Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="taskDescription" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="taskDescription">
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskCompleted" class="form-label">Completed</label>
+                            <input type="checkbox" class="form-check-input" id="taskCompleted">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Task</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+    {{!-- <section class="mt-4 d-flex align-items-center justify-content-center">
+    <div class="card text-white bg-dark">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="card-title">Task List</h5>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add New Task</button>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {{#if tasks}}
+                <!-- Displayed when tasks array is not empty -->
+                {{#each tasks}}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">{{this.description}}</p>
+                            <button class="btn btn-danger float-start">Delete</button>
+                            <button class="btn btn-primary float-end">Update</button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <!-- Displayed when tasks array is empty -->
+                <div class="col">
+                    <p>No tasks available.</p>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</section> --}}
+
+<section class="mt-4 d-flex align-items-center justify-content-center">
+    <div class="card text-white bg-dark">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="card-title">Task List</h5>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add New Task</button>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {{#if tasks}}
+                <!-- Displayed when tasks array is not empty -->
+                {{#each tasks}}
+                <div class="col-md-4">
+                    <div class="card mb-3 bg-dark text-white shadow-shine">
+                        <div class="card-body">
+                            <p class="card-text">{{this.description}}</p>
+                            <button class="btn btn-danger float-start">Delete</button>
+                            <button class="btn btn-primary float-end">Update</button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <!-- Displayed when tasks array is empty -->
+                <div class="col">
+                    <p>No tasks available.</p>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    {{>footer}}
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

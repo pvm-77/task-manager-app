@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
     // console.log('auth middleware')
     try {
         const token = req.header('Authorization').replace('Bearer ', '')
-        console.log('token in middleware',token)
+        console.log('token in middleware', token)
         const decoded = jwt.verify(token, config.JWT_SECRET);
         // console.log(decoded)
         const user = await User.findOne({ _id: decoded._id, 'tokens.token': token })
@@ -25,14 +25,13 @@ const auth = async (req, res, next) => {
 }
 
 const authenticateUser = async (req, res, next) => {
+    console.log('in auth middleware')
     try {
         const token = req.header('Authorization').replace('Bearer ', '')
-
-        console.log('token receive in middlware',token)
+        console.log('token in middlware is', token);
         const decoded = jwt.verify(token, config.JWT_SECRET)
-        // console.log(decoded)
+        console.log('decode is ', decoded);
         const user = await User.findOne({ _id: decoded._id, 'tokens.token': token })
-
         if (!user) {
             throw new Error()
         }
@@ -44,4 +43,4 @@ const authenticateUser = async (req, res, next) => {
 }
 
 
-export default {authenticateUser};
+export default { authenticateUser };

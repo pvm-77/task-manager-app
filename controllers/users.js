@@ -6,15 +6,26 @@ const userRouter = express.Router();
 
 // create user
 userRouter.post('/', async (req, res) => {
+    const user = new User(req.body);
     try {
-        const { name, email, password } = req.body;
-        const newUser = new User({ name, email, password });
-        await newUser.save();
-        res.status(201).json(newUser)
+        await user.save();
+        // generate token along with user
+        // token will be generate on User instance that is user and not on User model
+        const token = await user.generateAuthToken();
+        res.status(201).json({ user, token })
     } catch (error) {
-        res.status(500).json({ error: error.message })
-
+        res.status(400).json({ error: error.message });
     }
+
+    // try {
+    //     const { name, email, password } = req.body;
+    //     const newUser = new User({ name, email, password });
+    //     await newUser.save();
+    //     res.status(201).json(newUser)
+    // } catch (error) {
+    //     res.status(500).json({ error: error.message })
+
+    // }
 
 })
 
@@ -87,11 +98,12 @@ userRouter.delete('/:id', async (req, res) => {
 
 
 userRouter.post('/login', async (req, res) => {
-    console.log('in login controller');
+    console.log('in login', req.body)
     try {
+        console.log('in login try block');
         const user = await User.findByCredentials(req.body.email, req.body.password);
         const token = await user.generateAuthToken();
-        res.status(200).json({user,token});
+        res.status(200).json({ user, token });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -100,7 +112,7 @@ userRouter.post('/login', async (req, res) => {
 
 userRouter.post('/logout', middleware.authenticateUser, async (req, res) => {
     try {
-        console.log('token send by req:',req.token)
+
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
         })
@@ -110,6 +122,14 @@ userRouter.post('/logout', middleware.authenticateUser, async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 })
+userRouter.post('/logoutAll', middleware.authenticateUser, async (req, res) => {
+    try {
+        req.user.tokens = []
+        await req.user.save()
+        res.status(200).json({"message":"logout from all devices successfully"});
+    } catch (error) {
+        res.status(500).json({"error":error.message});
+    }
+})
 
 export default userRouter;
-

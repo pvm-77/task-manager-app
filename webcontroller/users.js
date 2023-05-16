@@ -2,17 +2,17 @@ import express from 'express';
 import fetch from 'node-fetch';
 import axios from 'axios';
 const webUserRouter = express();
-webUserRouter.get('/about',(req,res)=>{
-    res.render('about',{title:'about'})
+webUserRouter.get('/about', (req, res) => {
+    res.render('about', { title: 'about' })
 })
 webUserRouter.get('/', (req, res) => {
     // check if the user is logged in i.e the token cookie is present
     if (req.cookies.token) {
         // render home page with the user name
-        res.render('index', { user: req.cookies.user ,title:'home'});
+        res.render('index', { user: req.cookies.user, title: 'home' });
 
     } else {
-        res.render('index',{title:'jome'});
+        res.render('index', { title: 'jome' });
     }
 
 })
@@ -24,7 +24,7 @@ webUserRouter.get('/login', (req, res) => {
 });
 
 webUserRouter.post('/login', async (req, res) => {
-        console.log('in login post')
+    console.log('in login post', req.body)
     try {
         console.log('in login post try')
 
@@ -50,13 +50,46 @@ webUserRouter.post('/login', async (req, res) => {
             res.redirect('login', { title: 'Login', error: 'Invalid username or password' });
         }
     } catch (error) {
-        
+
         console.log('in login post catch')
 
         res.render('login', { title: 'Login', error: 'Something went wrong. Please try again later.' });
     }
 
 });
+
+webUserRouter.get('/tasks', async (req, res) => {
+    console.log('in task view')
+    try {
+        // Retrieve the token from the cookie
+        let token = req.cookies.token;
+
+        // make an API call to the backend server
+        const response = await fetch('http://localhost:3005/api/tasks', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        // check if the API call was successful
+        if (response.ok) {
+            // extract the user and token data from the API response
+            const data = await response.json();
+            console.log('ye hai data',data.taskData)
+            const tasks = data.taskData;
+
+            res.render('tasks', { title: 'tasks', tasks })
+        } else {
+            // render the login page with an error message
+            res.redirect('login', { title: 'Login', error: 'Invalid username or password' });
+        }
+    } catch (error) {
+
+        console.log('in login post catch')
+
+    }
+})
 
 webUserRouter.post('/logout', async (req, res) => {
     try {
@@ -75,12 +108,12 @@ webUserRouter.post('/logout', async (req, res) => {
         res.clearCookie('token');
         res.clearCookie('user');
 
-    
+
         res.redirect('/');
     } catch (error) {
-       
+
         console.error(error);
-        
+
     }
 })
 
